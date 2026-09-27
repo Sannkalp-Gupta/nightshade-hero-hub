@@ -207,6 +207,60 @@ function Index() {
         </div>
       </section>
 
+      {/* Hero profile popup */}
+      {selectedHero && (
+        <div
+          className="fixed inset-0 z-[100] flex items-end justify-center bg-black/80 backdrop-blur-sm sm:items-center sm:p-6"
+          onClick={() => setSelectedHero(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedHero.name} profile`}
+        >
+          <div
+            className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-t-2xl border border-border bg-card p-6 shadow-[0_0_60px_rgba(239,26,37,0.25)] sm:rounded-2xl sm:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="pointer-events-none absolute -right-4 -top-8 font-display text-[7rem] leading-none text-primary/10 sm:text-[9rem]">
+              {selectedHero.name.charAt(0)}
+            </span>
+            <button
+              type="button"
+              onClick={() => setSelectedHero(null)}
+              aria-label="Close profile"
+              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border text-lg text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              ✕
+            </button>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+              {selectedHero.alias}
+            </p>
+            <h3 className="hero-title mt-2 pr-10 text-4xl text-foreground sm:text-5xl">
+              {selectedHero.name}
+            </h3>
+            <div className="mt-4 h-px w-16 bg-primary" />
+            <p className="mt-6 text-sm font-bold uppercase tracking-wider text-foreground">
+              Power
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-primary">
+              {selectedHero.power}
+            </p>
+            <p className="mt-6 text-sm font-bold uppercase tracking-wider text-foreground">
+              Origin
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              {selectedHero.description}
+            </p>
+            <button
+              type="button"
+              onClick={() => setSelectedHero(null)}
+              className="mt-8 w-full rounded-md bg-primary px-6 py-3 text-sm font-bold uppercase tracking-widest text-primary-foreground btn-cinematic"
+            >
+              Back to the roster
+            </button>
+          </div>
+        </div>
+      )}
+
       {/* Footer */}
       <footer className="border-t border-border py-10">
         <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:px-6 sm:text-left">
