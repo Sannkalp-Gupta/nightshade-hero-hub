@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import heroImg from "@/assets/hero.jpg";
 
@@ -69,6 +70,24 @@ const heroes = [
 ];
 
 function Index() {
+  const [selectedHero, setSelectedHero] = useState<(typeof heroes)[number] | null>(
+    null,
+  );
+
+  // Close with Escape and lock page scroll while a profile is open
+  useEffect(() => {
+    if (!selectedHero) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedHero(null);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [selectedHero]);
+
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
       {/* Navbar */}
@@ -157,9 +176,12 @@ function Index() {
 
         <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {heroes.map((hero) => (
-            <article
+            <button
               key={hero.name}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 card-glow sm:p-8"
+              type="button"
+              onClick={() => setSelectedHero(hero)}
+              aria-label={`Open profile: ${hero.name}`}
+              className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-card p-6 text-left card-glow sm:p-8"
             >
               <span className="absolute -right-4 -top-6 font-display text-7xl text-primary/10 transition-colors duration-300 group-hover:text-primary/25 sm:text-8xl">
                 {hero.name.charAt(0)}
@@ -174,11 +196,70 @@ function Index() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {hero.description}
               </p>
-              <div className="mt-6 h-px w-12 bg-primary transition-all duration-300 group-hover:w-24" />
-            </article>
+              <div className="mt-6 flex items-center justify-between">
+                <div className="h-px w-12 bg-primary transition-all duration-300 group-hover:w-24" />
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100 max-sm:opacity-100">
+                  View profile →
+                </span>
+              </div>
+            </button>
           ))}
         </div>
       </section>
+
+      {/* Hero profile popup */}
+      {selectedHero && (
+        <div
+          className="fixed inset-0 z-[100] flex items-end justify-center bg-black/80 backdrop-blur-sm sm:items-center sm:p-6"
+          onClick={() => setSelectedHero(null)}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${selectedHero.name} profile`}
+        >
+          <div
+            className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-t-2xl border border-border bg-card p-6 shadow-[0_0_60px_rgba(239,26,37,0.25)] sm:rounded-2xl sm:p-10"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <span className="pointer-events-none absolute -right-4 -top-8 font-display text-[7rem] leading-none text-primary/10 sm:text-[9rem]">
+              {selectedHero.name.charAt(0)}
+            </span>
+            <button
+              type="button"
+              onClick={() => setSelectedHero(null)}
+              aria-label="Close profile"
+              className="absolute right-4 top-4 grid h-9 w-9 place-items-center rounded-md border border-border text-lg text-muted-foreground transition-colors hover:border-primary hover:text-primary"
+            >
+              ✕
+            </button>
+            <p className="text-xs font-bold uppercase tracking-[0.3em] text-primary">
+              {selectedHero.alias}
+            </p>
+            <h3 className="hero-title mt-2 pr-10 text-4xl text-foreground sm:text-5xl">
+              {selectedHero.name}
+            </h3>
+            <div className="mt-4 h-px w-16 bg-primary" />
+            <p className="mt-6 text-sm font-bold uppercase tracking-wider text-foreground">
+              Power
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-primary">
+              {selectedHero.power}
+            </p>
+            <p className="mt-6 text-sm font-bold uppercase tracking-wider text-foreground">
+              Origin
+            </p>
+            <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">
+              {selectedHero.description}
+            </p>
+            <button
+              type="button"
+              onClick={() => setSelectedHero(null)}
+              className="mt-8 w-full rounded-md bg-primary px-6 py-3 text-sm font-bold uppercase tracking-widest text-primary-foreground btn-cinematic"
+            >
+              Back to the roster
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Footer */}
       <footer className="border-t border-border py-10">
