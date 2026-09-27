@@ -28,31 +28,43 @@ const heroes = [
     name: "Crimson Blaze",
     alias: "The First Spark",
     power: "Commands living fire that burns only for justice.",
+    description:
+      "A firefighter who walked out of a collapsing inferno reborn, Crimson Blaze now carries the city's oldest flame in his veins. Where the darkness spreads, his fire follows — burning away fear and never harming the innocent.",
   },
   {
     name: "Night Warden",
     alias: "Shadow of the City",
     power: "Melts into darkness and strikes without a sound.",
+    description:
+      "Nobody has seen Night Warden's true face, and that is exactly how he keeps the city safe. By day he is a rumor, by night he is a shadow moving along rooftops, listening for the crime before it happens.",
   },
   {
     name: "Volt Queen",
     alias: "The Storm Caller",
     power: "Channels lightning from a single thunderclap.",
+    description:
+      "Born during the worst storm in a century, Volt Queen learned that thunder answers when she calls. She rides the storm fronts above the skyline, hurling lightning at anything that threatens her city.",
   },
   {
     name: "Titan Core",
     alias: "The Unbreakable",
     power: "Skin of steel, strength to lift a collapsing bridge.",
+    description:
+      "Titan Core was forged in the depths of a fallen reactor, and nothing has cracked him since. He is always the first through the wall and the last to leave — the solid ground every other hero stands on.",
   },
   {
     name: "Echo Pulse",
     alias: "The Sonic Wave",
     power: "Shatters concrete with a focused sound burst.",
+    description:
+      "A former musician who discovered her voice could do more than fill a stadium, Echo Pulse now fights with sound itself. One focused note can stop a riot; a single held chord can bring a building down.",
   },
   {
     name: "Phantom Drift",
     alias: "Between Moments",
     power: "Slips through time a heartbeat ahead of everyone.",
+    description:
+      "Phantom Drift exists one heartbeat in the future, which makes her impossible to ambush and even harder to catch. She sees every outcome before the fight begins — and simply chooses the one where everyone makes it home.",
   },
 ];
 
@@ -156,8 +168,12 @@ function Index() {
                 {hero.alias}
               </p>
               <h3 className="mt-3 text-3xl">{hero.name}</h3>
-              <p className="mt-4 text-muted-foreground">{hero.power}</p>
-              <div className="mt-6 h-px w-12 bg-primary transition-all duration-300 group-hover:w-24" />
+              <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-foreground">
+                {hero.power}
+              </p>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                {hero.description}
+              </p>
             </article>
           ))}
         </div>
