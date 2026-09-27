@@ -73,10 +73,10 @@ function Index() {
     <div className="min-h-screen bg-background text-foreground font-body">
       {/* Navbar */}
       <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur-md">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <a href="#" className="flex items-center gap-2">
-            <span className="inline-block h-3 w-3 rotate-45 bg-primary" />
-            <span className="font-display text-2xl tracking-widest text-foreground">
+        <nav className="mx-auto grid max-w-6xl grid-cols-[minmax(0,1fr)_auto] items-center gap-3 px-4 py-4 sm:flex sm:justify-between sm:px-6">
+          <a href="#" className="flex min-w-0 items-center gap-2">
+            <span className="inline-block h-3 w-3 shrink-0 rotate-45 bg-primary" />
+            <span className="truncate font-display text-xl tracking-widest text-foreground sm:text-2xl">
               NOVA<span className="text-primary">FORCE</span>
             </span>
           </a>
@@ -99,7 +99,7 @@ function Index() {
           </div>
           <a
             href="#heroes"
-            className="rounded-md bg-primary px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground md:hidden"
+            className="shrink-0 rounded-md bg-primary px-4 py-2 text-xs font-bold uppercase tracking-wider text-primary-foreground md:hidden"
           >
             Join
           </a>
@@ -116,29 +116,29 @@ function Index() {
           className="absolute inset-0 h-full w-full object-cover object-top"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-background/10" />
-        <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-40">
-          <p className="mb-4 text-sm font-bold uppercase tracking-[0.3em] text-primary">
+        <div className="relative mx-auto w-full max-w-6xl px-4 pb-16 pt-32 sm:px-6 sm:pb-20 sm:pt-40">
+          <p className="mb-4 text-xs font-bold uppercase tracking-[0.3em] text-primary sm:text-sm">
             The city needs legends
           </p>
-          <h1 className="hero-title max-w-3xl text-6xl text-foreground sm:text-7xl md:text-8xl">
+          <h1 className="hero-title max-w-3xl text-5xl text-foreground sm:text-7xl md:text-8xl">
             Rise above
             <br />
             the <span className="text-primary">darkness</span>
           </h1>
-          <p className="mt-6 max-w-xl text-lg text-muted-foreground">
+          <p className="mt-6 max-w-xl text-base text-muted-foreground sm:text-lg">
             Six extraordinary heroes. One impossible mission. The battle for
             the city begins when the lights go out.
           </p>
-          <div className="mt-8 flex flex-wrap gap-4">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
             <a
               href="#heroes"
-              className="rounded-md bg-primary px-8 py-4 text-sm font-bold uppercase tracking-widest text-primary-foreground btn-cinematic"
+              className="rounded-md bg-primary px-8 py-4 text-center text-sm font-bold uppercase tracking-widest text-primary-foreground btn-cinematic"
             >
               Meet the Heroes
             </a>
             <a
               href="#heroes"
-              className="rounded-md border border-input px-8 py-4 text-sm font-bold uppercase tracking-widest text-foreground transition-colors hover:border-primary hover:text-primary"
+              className="rounded-md border border-input px-8 py-4 text-center text-sm font-bold uppercase tracking-widest text-foreground transition-colors hover:border-primary hover:text-primary"
             >
               Watch Trailer
             </a>
@@ -147,27 +147,27 @@ function Index() {
       </section>
 
       {/* Heroes */}
-      <section id="heroes" className="mx-auto max-w-6xl px-6 py-24">
-        <p className="mb-3 text-sm font-bold uppercase tracking-[0.3em] text-primary">
+      <section id="heroes" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
+        <p className="mb-3 text-xs font-bold uppercase tracking-[0.3em] text-primary sm:text-sm">
           The Roster
         </p>
-        <h2 className="text-4xl uppercase sm:text-5xl">
+        <h2 className="text-3xl uppercase sm:text-5xl">
           Choose your <span className="text-primary">legend</span>
         </h2>
 
-        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {heroes.map((hero) => (
             <article
               key={hero.name}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card p-8 card-glow"
+              className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 card-glow sm:p-8"
             >
-              <span className="absolute -right-4 -top-6 font-display text-8xl text-primary/10 transition-colors duration-300 group-hover:text-primary/25">
+              <span className="absolute -right-4 -top-6 font-display text-7xl text-primary/10 transition-colors duration-300 group-hover:text-primary/25 sm:text-8xl">
                 {hero.name.charAt(0)}
               </span>
               <p className="text-xs font-bold uppercase tracking-[0.25em] text-primary">
                 {hero.alias}
               </p>
-              <h3 className="mt-3 text-3xl">{hero.name}</h3>
+              <h3 className="mt-3 text-2xl sm:text-3xl">{hero.name}</h3>
               <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-foreground">
                 {hero.power}
               </p>
@@ -182,7 +182,7 @@ function Index() {
 
       {/* Footer */}
       <footer className="border-t border-border py-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-6 sm:flex-row">
+        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 text-center sm:flex-row sm:px-6 sm:text-left">
           <span className="font-display text-xl tracking-widest">
             NOVA<span className="text-primary">FORCE</span>
           </span>
