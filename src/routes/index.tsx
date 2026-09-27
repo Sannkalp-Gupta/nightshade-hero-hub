@@ -70,6 +70,24 @@ const heroes = [
 ];
 
 function Index() {
+  const [selectedHero, setSelectedHero] = useState<(typeof heroes)[number] | null>(
+    null,
+  );
+
+  // Close with Escape and lock page scroll while a profile is open
+  useEffect(() => {
+    if (!selectedHero) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSelectedHero(null);
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [selectedHero]);
+
   return (
     <div className="min-h-screen bg-background text-foreground font-body">
       {/* Navbar */}
