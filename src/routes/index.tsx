@@ -176,9 +176,12 @@ function Index() {
 
         <div className="mt-10 grid gap-4 sm:mt-12 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
           {heroes.map((hero) => (
-            <article
+            <button
               key={hero.name}
-              className="group relative overflow-hidden rounded-xl border border-border bg-card p-6 card-glow sm:p-8"
+              type="button"
+              onClick={() => setSelectedHero(hero)}
+              aria-label={`Open profile: ${hero.name}`}
+              className="group relative cursor-pointer overflow-hidden rounded-xl border border-border bg-card p-6 text-left card-glow sm:p-8"
             >
               <span className="absolute -right-4 -top-6 font-display text-7xl text-primary/10 transition-colors duration-300 group-hover:text-primary/25 sm:text-8xl">
                 {hero.name.charAt(0)}
@@ -193,8 +196,13 @@ function Index() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {hero.description}
               </p>
-              <div className="mt-6 h-px w-12 bg-primary transition-all duration-300 group-hover:w-24" />
-            </article>
+              <div className="mt-6 flex items-center justify-between">
+                <div className="h-px w-12 bg-primary transition-all duration-300 group-hover:w-24" />
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-primary opacity-0 transition-opacity duration-300 group-hover:opacity-100 max-sm:opacity-100">
+                  View profile →
+                </span>
+              </div>
+            </button>
           ))}
         </div>
       </section>
