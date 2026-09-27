@@ -174,6 +174,7 @@ function Index() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {hero.description}
               </p>
+              <div className="mt-6 h-px w-12 bg-primary transition-all duration-300 group-hover:w-24" />
             </article>
           ))}
         </div>
